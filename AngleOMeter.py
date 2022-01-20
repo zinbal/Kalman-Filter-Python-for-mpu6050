@@ -151,21 +151,22 @@ while True:
 	            kalAngleX = kalmanX.getAngle(roll,gyroXRate,dt)
 
 		#angle = (rate of change of angle) * change in time
-	    gyroXAngle = gyroXRate * dt
-	    gyroYAngle = gyroYAngle * dt
+	    gyroXAngle = round(gyroXRate * dt,2)
+	    gyroYAngle = round(gyroYAngle * dt,2)
 
 		#compAngle = constant * (old_compAngle + angle_obtained_from_gyro) + constant * angle_obtained from accelerometer
-	    compAngleX = 0.93 * (compAngleX + gyroXRate * dt) + 0.07 * roll
-	    compAngleY = 0.93 * (compAngleY + gyroYRate * dt) + 0.07 * pitch
+	    compAngleX = round(0.93 * (compAngleX + gyroXRate * dt) + 0.07 * roll,2)
+	    compAngleY = round(0.93 * (compAngleY + gyroYRate * dt) + 0.07 * pitch,2)
 
 	    if ((gyroXAngle < -180) or (gyroXAngle > 180)):
 	        gyroXAngle = kalAngleX
 	    if ((gyroYAngle < -180) or (gyroYAngle > 180)):
 	        gyroYAngle = kalAngleY
 
-	    print("Angle X: " + str(kalAngleX)+"   " +"Angle Y: " + str(kalAngleY))
-	    #print(str(roll)+"  "+str(gyroXAngle)+"  "+str(compAngleX)+"  "+str(kalAngleX)+"  "+str(pitch)+"  "+str(gyroYAngle)+"  "+str(compAngleY)+"  "+str(kalAngleY))
-	    time.sleep(0.005)
+	    #print("Angle X: " + str(compAngleX)+"   " +"Angle Y: " + str(compAngleY))
+	    print("Roll: ", str(round(roll,2))+"  "+"Pitch: ",str(round(pitch,2))+"\t \t"+"Angle X: " + str(compAngleX)+"   " +"Angle Y: " + str(compAngleY))
+	    time.sleep(0.05)
 
 	except Exception as exc:
 		flag += 1
+
